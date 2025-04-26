@@ -73,17 +73,21 @@ A vibrant 3D side-scrolling fantasy game built with Three.js, featuring natural 
 - Procedurally generated terrain and buildings
 - Dynamic lighting and shadows
 
-## 📋 API Keys
+## 📋 API Keys (IMPORTANT FOR HACKATHON ORGANIZERS)
 
 ### OpenAI API Key
-- Required for the AI command functionality
-- Enter it in the UI when prompted
+- **REQUIRED**: Hackathon organizers/judges must provide their own OpenAI API key
+- Enter it in the UI input field labeled "OpenAI API Key" and click "Save API Key"
 - Used to process natural language commands
+- Without this key, the AI command functionality will not work
 
 ### Sarvam.ai API Key
-- Required for Hindi speech recognition
-- Enter it when prompted after clicking the speech button
+- **REQUIRED**: Hackathon organizers/judges must provide their own Sarvam.ai API key
+- Enter it when prompted after clicking the "🎤 Speak" button
 - Used to convert Hindi speech to English text
+- Without this key, the Hindi speech recognition will not work
+
+> **Note for Hackathon Organizers**: Both API keys are required to fully evaluate this submission. The keys are not stored in the repository for security reasons and must be entered by the user.
 
 ## 🔧 Troubleshooting
 
