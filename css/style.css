@@ -1,0 +1,619 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* AI Command Input Section styling */
+.ai-command-section {
+    position: absolute;
+    top: 20px;
+    left: 20px; /* Moved to left side */
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    border-left: 4px solid #8E44AD; /* Purple accent for AI */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+/* Player controls section styling */
+.player-controls-section {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.building-upload-section {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Moved to right side */
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+    width: 300px;
+    border-left: 4px solid #2196F3; /* Blue accent */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.building-upload-section h2 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: #2196F3;
+}
+
+.upload-instructions {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.file-input {
+    display: none; /* Hide the actual file input */
+}
+
+.file-input-label {
+    display: inline-block;
+    background-color: #2196F3;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.file-input-label:hover {
+    background-color: #0d8bf2;
+}
+
+#spawn-building-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#spawn-building-btn:hover:not([disabled]) {
+    background-color: #3e8e41;
+}
+
+#spawn-building-btn[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.upload-options {
+    margin-bottom: 15px;
+}
+
+.upload-options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.upload-options input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: white;
+}
+
+.upload-preview {
+    margin-top: 15px;
+    border: 1px solid #555;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.upload-preview img {
+    max-width: 100%;
+    max-height: 150px;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 3px;
+}
+
+.ai-command-section h2 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: #8E44AD;
+}
+
+#ai-command-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+}
+
+#speak-button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #FF5722; /* Orange for speech button */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#speak-button:hover {
+    background-color: #E64A19;
+}
+
+#speak-button.recording {
+    background-color: #F44336; /* Red when recording */
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+#execute-ai-command-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #8E44AD;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#execute-ai-command-btn:hover {
+    background-color: #6C3483;
+}
+
+.recording-indicator,
+.ai-processing-indicator {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: rgba(142, 68, 173, 0.2);
+    border-radius: 4px;
+}
+
+.recording-indicator {
+    background-color: rgba(255, 87, 34, 0.2); /* Orange background for recording */
+}
+
+.recording-indicator.error {
+    background-color: rgba(244, 67, 54, 0.2); /* Red background for error */
+    color: #F44336;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #8E44AD;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none;
+}
+
+.ai-response-display {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+.ai-response-display h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #9B59B6;
+}
+
+#ai-response-json {
+    margin: 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 12px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: #E1BEE7;
+}
+
+.api-key-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+.api-key-section h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #9B59B6;
+}
+
+.api-key-input {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#openai-api-key {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+#save-api-key-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #8E44AD;
+    color: white;
+    cursor: pointer;
+}
+
+.api-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.api-settings label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+}
+
+#openai-model {
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+#openai-temperature {
+    flex: 1;
+    max-width: 100px;
+}
+
+#temperature-value {
+    min-width: 30px;
+    text-align: center;
+}
+
+.text-command-section h2 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: #FF5722;
+}
+
+.command-instructions {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.command-input-container {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+#text-command-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+}
+
+#execute-text-command-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #FF5722;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#execute-text-command-btn:hover {
+    background-color: #E64A19;
+}
+
+.command-examples {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+
+.command-examples h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #FF9800;
+}
+
+.command-examples ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 12px;
+}
+
+.command-examples li {
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.command-examples code {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+    color: #FF9800;
+}
+
+/* Control panel styling */
+#control-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.button-group {
+    display: flex;
+    gap: 8px;
+}
+
+#control-panel button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#control-panel button:hover {
+    background-color: rgba(30, 30, 30, 0.9);
+    transform: scale(1.05);
+}
+
+#control-panel button:active {
+    transform: scale(0.95);
+}
+
+#day-sky-btn {
+    border-left: 4px solid #87CEEB; /* Light blue for day sky */
+}
+
+#sunset-sky-btn {
+    border-left: 4px solid #ff7e47; /* Orange for sunset */
+}
+
+#grassy-ground-btn {
+    border-left: 4px solid #4CAF50; /* Green for grass */
+}
+
+#snowy-ground-btn {
+    border-left: 4px solid #ffffff; /* White for snow */
+}
+
+#add-tree-btn {
+    border-left: 4px solid #4CAF50; /* Green for adding trees */
+}
+
+#remove-tree-btn {
+    border-left: 4px solid #F44336; /* Red for removing trees */
+}
+
+.sequence-group {
+    margin-top: 20px;
+}
+
+#run-sequence-btn {
+    border-left: 4px solid #9C27B0; /* Purple for sequence */
+    background-color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+}
+
+/* Parameterized commands styling */
+.param-commands-section {
+    margin-top: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #2196F3;
+}
+
+.param-commands-section h3 {
+    margin: 0 0 15px 0;
+    color: white;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.param-command-group {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.param-command-group input {
+    padding: 8px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-right: 0;
+}
+
+.param-command-group input[type="color"] {
+    padding: 0;
+    width: 40px;
+    height: 34px;
+    background: none;
+}
+
+.param-command-group input[type="number"] {
+    width: 40px;
+}
+
+.param-command-group input[type="text"] {
+    width: 150px;
+}
+
+.param-command-group button {
+    border-radius: 0 4px 4px 0;
+    margin-left: 0;
+    border-left: none;
+    background-color: rgba(33, 150, 243, 0.8);
+    color: white;
+    padding: 8px 12px;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.param-command-group button:hover {
+    background-color: rgba(33, 150, 243, 1);
+    transform: none;
+}
+
+#change-sky-color-btn {
+    background-color: rgba(33, 150, 243, 0.8); /* Blue */
+}
+
+#change-ground-color-btn {
+    background-color: rgba(76, 175, 80, 0.8); /* Green */
+}
+
+#spawn-trees-btn {
+    background-color: rgba(139, 195, 74, 0.8); /* Light Green */
+}
+
+#execute-custom-command-btn {
+    background-color: rgba(156, 39, 176, 0.8); /* Purple */
+}
+
+/* Player controls styling */
+.player-controls-section {
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #1E88E5; /* Blue for player */
+}
+
+.player-controls-section h3 {
+    margin: 0 0 10px 0;
+    color: white;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.control-instructions {
+    color: #ccc;
+    font-size: 12px;
+    margin: 0 0 15px 0;
+    font-style: italic;
+}
+
+#change-player-color-btn {
+    background-color: rgba(30, 136, 229, 0.8); /* Blue */
+}
+
+#reset-player-btn {
+    background-color: rgba(244, 67, 54, 0.8); /* Red */
+    border-left: 4px solid #F44336;
+    margin-top: 10px;
+}
+
+/* Loading screen styling */
+.loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    z-index: 100;
+}
+
+.loading-bar-container {
+    width: 50%;
+    height: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.loading-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #64c8e6;
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy 3D Side-Scroller</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container"></div>
+    
+
+    
+    <!-- AI Command Input Section - Natural language processing -->
+    <div class="ai-command-section">
+        <h2>AI Command Input</h2>
+        <p class="command-instructions">Describe what you want in natural language</p>
+        
+        <div class="command-input-container">
+            <input type="text" id="ai-command-input" placeholder="e.g., Make it a sunny day with green grass...">
+            <button id="speak-button" title="Speak in Hindi">🎤 Speak</button>
+            <button id="execute-ai-command-btn">Generate</button>
+        </div>
+        
+        <div id="recording-indicator" class="recording-indicator hidden">
+            <div class="spinner"></div>
+            <span>Listening...</span>
+        </div>
+        
+        <div id="ai-processing-indicator" class="ai-processing-indicator hidden">
+            <div class="spinner"></div>
+            <span>AI is processing your request...</span>
+        </div>
+        
+        <div id="ai-response-display" class="ai-response-display hidden">
+            <h4>AI Interpretation:</h4>
+            <pre id="ai-response-json"></pre>
+        </div>
+        
+        <div class="command-examples">
+            <h4>Example Natural Language Inputs:</h4>
+            <ul>
+                <li>"Make it a sunny day with green grass"</li>
+                <li>"Create a snowy winter scene with pine trees"</li>
+                <li>"I want a spooky forest at night"</li>
+                <li>"Change to a desert landscape at sunset"</li>
+            </ul>
+        </div>
+        
+        <div class="api-key-section">
+            <h4>OpenAI API Settings:</h4>
+            <div class="api-key-input">
+                <input type="password" id="openai-api-key" placeholder="Enter your OpenAI API key">
+                <button id="save-api-key-btn">Save Key</button>
+            </div>
+            <div class="api-settings">
+                <label>
+                    Model:
+                    <select id="openai-model">
+                        <option value="gpt-4o">GPT-4o</option>
+                        <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                    </select>
+                </label>
+                <label>
+                    Temperature:
+                    <input type="range" id="openai-temperature" min="0" max="1" step="0.1" value="0.7">
+                    <span id="temperature-value">0.7</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Building section removed as requested -->
+    
+    <!-- Player controls section -->
+    <div class="player-controls-section">
+        <h3>Player Controls</h3>
+        <p class="control-instructions">Use Arrow Keys or A/D to move, Space to jump</p>
+            
+        <div class="button-group">
+            <button id="reset-player-btn">Reset Player Position</button>
+        </div>
+    </div>
+    
+    <!-- Import Three.js from CDN -->
+     
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/loaders/FBXLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/libs/stats.min.js"></script>
+    
+    <!-- Import NaturalLanguageRouter -->
+    <script src="js/NaturalLanguageRouter.js"></script>
+    <!-- Configuration file with API keys and settings -->
+    <script src="js/config.js"></script>
+    
+    <!-- Import manager scripts -->
+    <script src="js/managers/SkyManager.js"></script>
+    <script src="js/managers/GroundManager.js"></script>
+    <script src="js/managers/EnvironmentManager.js"></script>
+    <script src="js/PlayerCharacter.js"></script>
+    <script src="js/managers/PlayerManager.js"></script>
+    
+    <!-- Import utility scripts -->
+    <script src="js/utils/ImageStyler.js"></script>
+    <script src="js/SpeechToTextTranslator.js"></script>
+    <script src="js/utils/CodeEvaluator.js"></script>
+    
+    <!-- Import prompt files -->
+    <script src="js/prompts/skyscraperPrompt.js"></script>
+    
+    <!-- Import command system -->
+    <script src="js/CommandDispatcher.js"></script>
+    <script src="js/CommandQueue.js"></script>
+    <script src="js/NaturalLanguageProcessor.js"></script>
+    
+    <!-- Import our main game script -->
+    <script src="js/main.js"></script>
+</body>
+</html>
